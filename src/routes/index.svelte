@@ -2,51 +2,55 @@
   export async function load({ fetch }) {
     const res = await fetch('/api')
     const { data: breweries } = await res.json()
-    console.log(breweries);
-    return 'ok'
+
+    if (res.ok) {
+      return {
+        props: {
+          breweries
+        }
+      }
+    }
+
+    return {
+      status: res.status,
+      error: new Error('Error fetching breweries')
+    }
+
   }
 </script>
 
 <script>
+  import Brewery from '$lib/components/brewery.svelte';
+
   let title = 'Brewipedia';
-
-  const updateTitle = () => {
-    title = 'new title';
-  }
-
-  export let guides
+  let highlightCity = 'Atlanta'
+  export let breweries;
 </script>
 
-<!-- <div>
-  <ul>
-    {#each guides as guide}
-      <li>
-        <a href="/">{guide.title}</a>
-      </li>
-    {/each}
-  </ul>
-</div> -->
+<div class="has-background-brewipedia-color">
+  <div class="container pb-4">
+    <div class="rows">
+      <div class="row is-size-1 title">
+        <h1 id="playwright-title" class="is-family-secondary is-size-1">
+          {title}
+        </h1>
+      </div>
 
-<div class="index">
-  <h1 class="is-size-1">{title}</h1>
-  <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam sapiente 
-      odio facere sequi eos iusto autem praesentium animi exercitationem nulla, 
-      aliquam laborum rem excepturi laudantium repellendus assumenda est velit 
-      suscipit aut officiis eaque hic! Eaque assumenda minima in alias autem 
-      exercitationem at tenetur accusamus fugit vel. Optio impedit accusamus 
-      numquam, eum eaque quod facere perferendis voluptatum animi, doloribus 
-      tenetur at!
-  </p>
+      <div class="row is-size-4 subtitle">
+        <p>
+          Wikipedia for breweries, but with a twist! Every week we highlight the top 20 best breweries
+          in a US city. This weeks highlight is...{highlightCity}! Enjoy this week's top 20 list and 
+          don't forget to tell em we sent ya! 😉
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns is-flex-wrap-wrap">
+      {#each breweries as brewery}
+        <Brewery {brewery}/>
+      {/each}
+    </div>
+  </div>
 </div>
-
-<button class="button is-primary">test</button>
-
-<style>
-  .index {
-      text-align: center;
-      display: block;
-      margin: 20px auto;
-  }
-
-</style>

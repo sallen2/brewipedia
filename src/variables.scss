@@ -1,2 +1,40 @@
 /* Variables and mixins declared here will be available in all other SCSS files */ /* https://github.com/jgthms/bulma/issues/1293 */
+@import 'bulma/sass/utilities/_all';
+@import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
+
+// body
 $body-overflow-y: auto;
+
+// custom colors
+$orange: #f5d142;
+$orange-invert: findColorInvert($orange);
+$beer-orange: #ffd562;
+$beer-orange-invert: findColorInvert($beer-orange);
+$brewipedia-color: #f6d477;
+$brewipedia-color-invert: findColorInvert($brewipedia-color);
+$brewipedia-color-light: #fff1cb;
+$brewipedia-color-light-invert: findColorInvert($brewipedia-color-light);
+$custom-colors: (
+	'beer-orange': (
+		$beer-orange,
+		$beer-orange-invert,
+	),
+	'brewipedia-color': (
+		$brewipedia-color,
+		$brewipedia-color-invert,
+	),
+	'brewipedia-color-light': (
+		$brewipedia-color-light,
+		$brewipedia-color-light-invert,
+	),
+);
+
+$colors: map-merge($colors, $custom-colors);
+
+// custom font
+$family-brewipedia: 'Niconne', serif;
+$family-secondary: $family-brewipedia;
+
+// custom modal styles
+$modal-card-head-border-bottom: none;
+$modal-card-foot-border-top: none;
