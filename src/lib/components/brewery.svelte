@@ -20,10 +20,25 @@
               {brewery.name}
             </h1>
           </div>
+          <div class="row">
+            Type: 
+            {#if brewery.brewery_type}
+              {brewery.brewery_type}
+              {:else}
+              None
+            {/if}
+          </div>
           <div class="row"> 
-            {#if brewery.street}
+            Address: {#if brewery.street}
               {brewery.street}
             {/if} {brewery.city}, {brewery.state}
+          </div>
+          <div class="row">
+            {#if brewery.website_url}
+              Website: <a href={brewery.website_url} target="_blank">{brewery.website_url}</a> 
+              {:else}
+                None
+            {/if}
           </div>
         </div>
         <div class="container pt-6">

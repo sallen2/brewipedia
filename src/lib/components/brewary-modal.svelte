@@ -38,7 +38,7 @@
             <div class="row mt-3">
               <p class="is-size-4 is-family-secondary">Website</p> 
               {#if brewery.website_url}
-                <a href={brewery.website_url}>{brewery.website_url}</a> 
+                <a href={brewery.website_url} target="_blank">{brewery.website_url}</a> 
                 {:else}
                 None
               {/if}
